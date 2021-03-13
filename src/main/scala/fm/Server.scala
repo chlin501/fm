@@ -36,7 +36,8 @@ object Server {
   }
 
   def server(
-      hostValue: IO[UnknownHostException, InetAddress] = InetAddress.localHost,
+      hostValue: IO[UnknownHostException, InetAddress] =
+        InetAddress.byName("127.0.0.1"),
       port: Int = 8080
   ) =
     AsynchronousServerSocketChannel().mapM { socket =>
