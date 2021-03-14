@@ -58,6 +58,7 @@ object Client {
           )
           .fork
         _ <- task.join
+        _ <- run()
       } yield ()
     val runtime = Runtime.default
     runtime.unsafeRun(
