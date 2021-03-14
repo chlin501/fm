@@ -41,8 +41,8 @@ object Server {
     val runtime = Runtime.default
     runtime.unsafeRun(
       server(hostValue = InetAddress.byName(host), port = port).fold(
-        failure => log.error(failure.getMessage),
-        success => log.info(success)
+        failure => log.error(s"Failure message: ${failure.getMessage}"),
+        success => log.info(s"Successful result: $success")
       )
     )
   }

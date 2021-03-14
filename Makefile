@@ -1,7 +1,7 @@
 ifdef host
         host := $(host)
 else
-        host := "localhost"
+        host := "127.0.0.1"
 endif
 
 ifdef port
@@ -11,5 +11,11 @@ else
 endif
 
 server:
-	@echo "run server with host: $(host), port: $(port) ..."
+	@echo "Start server with host: $(host), port: $(port) ..."
 	sbt "runMain fm.Server --host $(host) --port $(port)"
+client: 
+	@echo "Start client in connecting to host: $(host), port: $(port) ..."
+	sbt "runMain fm.Client --host $(host) --port $(port)"
+clean:
+	rm -r target
+	rm -r project

@@ -62,8 +62,8 @@ object Client {
     val runtime = Runtime.default
     runtime.unsafeRun(
       run.fold(
-        failure => log.error(s"Failure reason ${failure.getMessage}"),
-        success => log.info(s"Success result: $success")
+        failure => log.error(s"Failure message: ${failure.getMessage}"),
+        success => log.info(s"Successful result: $success")
       )
     )
   }
