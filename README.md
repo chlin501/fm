@@ -34,7 +34,7 @@
 
       * `<ctrl> + c`
 
-## Improvement
+## Future Improvements
 
   * Use assembly plugin to create a fat jar for deployment or some other operations
 
