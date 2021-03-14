@@ -7,6 +7,7 @@ import zio.nio.channels._
 import zio.nio.core._
 import org.rogach.scallop._
 
+import java.io.IOException
 import java.net.UnknownHostException
 
 object Server {
@@ -14,6 +15,10 @@ object Server {
   import Logging._
   protected[fm] val log = Logging()
 
+  /**
+    * Command line options
+    * @param arguments that contains host port values
+    */
   protected[fm] case class Options(arguments: Seq[String])
       extends ScallopConf(arguments) {
     val host = opt[String](
@@ -24,6 +29,10 @@ object Server {
     verify()
   }
 
+  /**
+    * Entry point for starting server process
+    * @param args contains host port values
+    */
   def main(args: Array[String]): Unit = {
     val options = Options(args)
     val host = options.host()
@@ -31,15 +40,24 @@ object Server {
     log.info(s"Starting server @$host:$port ...")
     val runtime = Runtime.default
     runtime.unsafeRun(
-      server(hostValue = InetAddress.byName(host), port = port)
+      server(hostValue = InetAddress.byName(host), port = port).fold(
+        failure => log.error(failure.getMessage),
+        success => log.info(success)
+      )
     )
   }
 
+  /**
+    * Server process that start asynchronous server socket channel
+    * @param hostValue that contains host information
+    * @param port value for starting server
+    * @return ZIO object that may fail with IOException
+    */
   def server(
       hostValue: IO[UnknownHostException, InetAddress] =
         InetAddress.byName("127.0.0.1"),
       port: Int = 8080
-  ) =
+  ): ZIO[Console with Clock, IOException, Unit] =
     AsynchronousServerSocketChannel().mapM { socket =>
       for {
         hostname <- hostValue.map(_.hostname)
@@ -61,6 +79,11 @@ object Server {
       } yield ()
     }.useForever
 
+  /**
+    * Handle asynchrous socket channel content
+    * @param channel is asynchronous socket channel
+    * @return unit encapsulated in ZIO object
+    */
   def handle(
       channel: AsynchronousSocketChannel
   ): ZIO[Console with Clock, Throwable, Unit] = {
