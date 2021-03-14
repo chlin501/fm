@@ -18,7 +18,7 @@
 
   * Start
 
-      * `make client host=<host ip> port=<port value>`  or `make server`
+      * `make client host=<host ip> port=<port value>`  or `make client`
 
           * default host is `127.0.0.1`
 
@@ -26,7 +26,7 @@
 
 ## Improvement
 
-  * Use assembly plugin to create fat jar for deployment or some other operations
+  * Use assembly plugin to create a fat jar for deployment or some other operations
 
 # References
 
