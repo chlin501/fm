@@ -72,7 +72,7 @@ object Client {
     * With Async socket channel in connecting to the remote server
     * @param hostValue is the remote host
     * @param port of the remote server
-    * @return
+    * @return Managed Asynchronous socket channel object
     */
   def client(
       hostValue: IO[UnknownHostException, InetAddress] =
