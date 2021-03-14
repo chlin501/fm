@@ -53,7 +53,7 @@ object Client {
         task <- client(hostValue = InetAddress.byName(host), port = port)
           .use(
             _.writeChunk(
-              Chunk.fromArray(content.replace("\n", "").map(_.toByte).toArray)
+              Chunk.fromArray(content.map(_.toByte).toArray)
             )
           )
           .fork

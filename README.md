@@ -30,10 +30,18 @@
 
           * default port is `8080`
 
+  * Stop
+
+      * `<ctrl> + c`
+
 ## Improvement
 
   * Use assembly plugin to create a fat jar for deployment or some other operations
 
+  * Use `scope`[2] to manage resource release lifecyle, preventing `Channel has reached the end of stream` issue
+
 # References
 
   [1]. [sbt-assembly](https://github.com/sbt/sbt-assembly)
+
+  [2]. [Flexible Resource Scoping](https://zio.github.io/zio-nio/docs/essentials/essentials_resources)
