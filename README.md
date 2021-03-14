@@ -1,5 +1,11 @@
 # Commands
 
+  * Java: `11.0.6`
+
+  * Scala: `2.13.1`
+
+  * Make: `4.3`
+
 ## Server
 
   * Start
